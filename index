@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style>
+span{cursor: pointer;margin: 10px}
+#box div{
+    margin-top: 10px;
+}
+</style>
+</head>
+<body>
+<div id="box">
+
+</div>
+
+<script>
+var llPiece = [
+  [0, 0, 1, 0],
+  [0, 0, 1, 0],
+  [0, 1, 1, 0],
+  [0, 0, 0, 0]
+];
+var llPiece = [
+  [1, 0, 0],
+  [1, 1, 1],
+  [0, 0, 0]
+];
+llPiece = [
+  [1, 0, 0],
+  [1, 1, 0],
+  [0, 1, 0]
+];
+llPiece = [
+  [1, 1],
+  [1, 1]
+];
+llPiece = [
+  [0, 1, 0],
+  [1, 1, 1],
+  [0, 0, 0]
+];
+llPiece = [
+  [0, 1, 0,0],
+  [0, 1, 0,0],
+	[0, 1, 0,0],
+  [0, 1, 0,0]
+];
+var box =  document.getElementById('box');
+function render(arr){
+    for(var i = 0; i < arr.length; i ++){
+        var _div = document.createElement('div');
+        box.append(_div)
+        for(var j = 0; j < arr[i].length; j ++){
+            var _span = document.createElement('span');
+            _span.innerHTML = arr[i][j];
+            _div.append(_span)
+        }
+    }
+}
+
+function rotate(arr){
+    var _arr = [];
+    for(var i = 0; i < arr.length; i ++){
+        _arr[i] = [];
+        for(var j = 0; j < arr[i].length; j ++){
+            _arr[i][j] = arr[arr[i].length - j - 1][i]
+        }
+    }
+    llPiece = _arr
+    return llPiece;
+};
+document.onkeydown = function(e){
+   if(e.keyCode == 38){
+     console.log(1)
+      render(rotate(llPiece));
+   }
+}
+</script>
+    
+</body>
+</html>
