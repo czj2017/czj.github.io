@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>array</title>
+    <style>
+    span{
+        display: none;
+    }
+    span:first-child{
+        display: block
+    }
+    </style>
+</head>
+<body>
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+<div id="box">
+    <span>一</span>
+    <span>二</span>
+    <span>三</span>
+</div>
+<script src='tool.js'></script>
+
+
+<script>
+var twoSum = function(nums, target) {
+    var newarr = [];
+    for(var i = 0; i < nums.length; i ++){
+        var value = target - nums[i] ; 
+        console.log(value)
+        if(nums.indexOf(value) > -1 && nums.indexOf(value) != i){
+             console.log(i)
+            newarr.push(i)
+            newarr.push(nums.indexOf(value))
+            break;
+        }
+    }
+    return newarr;
+};
+function Foo(){
+    getName = function (){alert(1)};
+   
+    return this;
+}
+Foo.getName = function(){alert(2)}
+Foo.prototype.getName = function (){alert(3)}
+var getName = function(){alert(4)}
+function getName(){alert(5)};
+
+// Foo.getName() //2
+// getName()//4
+// Foo().getName()//1
+// new Foo.getName() //2
+// new Foo().getName() //3
+// new new Foo().getName() //3
+
+
+</script>
+
+<script>
+/*拼接字符串
+$(document).on('click',this.singleReduce,function(e){
+    var e = e || window.event;
+    var target = e.target || e.srcElement;
+    target.innerHTML == '-' ? _this.numReduce($(target)) : null;
+    })
+$(document).on('click',this.singlePlus,function(){
+    var e = e || window.event;
+    var target = e.target || e.srcElement;
+    target.innerHTML == '+' ? _this.numPlus($(target)) : null;
+    
+})
+$(document).on('click',this.allCheckedBox,function(e){
+    var e = e || window.event;
+    var target = e.target || e.srcElement;
+    if(target.nodeName == 'INPUT'){
+        _this.statusColor($(target));//选择状态切换
+        _this.totalMoney();//金额合计
+    }
+    
+})
+        getShopGoodsAjax: function(){
+            $.ajax({
+                url: pathConfig._DIR + '/app/Cart/index',
+                type: 'post',
+                data:{
+                    sid:'nbagj3bef5nrekdvluu50e8di3'
+                },
+                async: true,
+                dataType: 'json',
+                success: function(res){
+                    var data = res.data;
+                    var str = '';
+                    for(var i = 0; i < data.length; i ++){
+                        var shopstr = '',goodsStr = '';
+                         shopstr =
+                        `
+                            <div class="item">
+                                <div class="itme_son borderBottom">
+                                    <div class="l"><input type="checkbox" /></div>
+                                    <div class="r"><img class="logo" src="${pathConfig.PICDIR}${data[i].shop_img}" />${data[i].name}</div>
+                                </div>
+                                <div class="goodsWrap">
+                        `
+                        for(var j = 0; j < data[i]['con'].length; j ++){
+                            console.log(data[i]['con'])
+                             goodsStr += 
+                            `
+                            <div class="itme_son borderBottom">
+                                <div class="l"><input type="checkbox" /></div>
+                                <div class="r_more">
+                                    <div class="goods_img">
+                                        <a href="javascript:void(0)"><img src="${pathConfig.PICDIR}${data[i]['con'][j]['goods_img']}" alt="" /></a>
+                                    </div>
+                                    <div class="otherinfo">
+                                        <div class="goods_otherInfo">
+                                            <div class="goods_name">${data[i]['con'][j]['goods_name']}</div>
+                                            <div class="goods_spec">${data[i]['con'][j]['goods_shop_spec']}</div>
+                                        </div>
+                                        <div class="price_mount">
+                                            <div class="goods_price">¥<span>${data[i]['con'][j]['goods_price']}</span></div>
+                                            <div class="amount_box">
+                                                <span class="reduce reSty">-</span>
+                                                    <i>${data[i]['con'][j]['num']}</i>
+                                                <span class="plus">+</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            `
+                        }
+
+                        str += shopstr + goodsStr +  "</div></div>"
+                        
+                    }
+                    $('.cartDetail').append(str);
+                },
+                error: function(){
+                    
+                }
+            })
+        },
+*/
+/*
+var obj = {
+    '颜色':'blue',
+    '型号':'539DFA',
+    '功能':{
+        '1':1,
+        '2':2,
+        '3':[1,2,3]
+    }
+}
+function deepClone(obj){
+    var wrap;
+    var compare = {
+        'Object':'Object',
+        'Array':'Array'
+    }
+    function transfrom(str){
+        return Object.prototype.toString.call(str).slice(8,-1)
+    }
+    if(compare.hasOwnProperty(transfrom(obj))){
+       wrap = transfrom(obj) == 'Object' ? {} : [];
+       for(key in obj){
+            if(compare.hasOwnProperty(transfrom(obj[key]))){
+                wrap[key] = deepClone(obj[key])
+            }else{
+                wrap[key] = obj[key]
+            }
+       }
+    }else{
+        wrap = obj;
+    }
+    return wrap;
+}
+
+var b = deepClone(obj)
+/*
+
+function test (){
+    var n = 1;
+    return function add(){
+       n ++;
+       console.log(n)
+    }
+}
+var  a = test();
+var a = {'a':'d','b':"品牌故事",'own':{'1':'lol','2':'dnf'}};
+
+
+function deep(a){ //简洁的对象克隆
+     var b = JSON.stringify(a);
+     var newObj = JSON.parse(b);
+     return newObj;
+}
+ 
+// 对象深克隆
+var a = {'a':'d','b':"品牌故事",'own':{'1':'lol','2':'dnf'}};
+    var b = [1,7,{'d':'c'}];
+    var c = null;
+    function deepClone(obj){
+        var newOne;
+        var compareObject = {
+            'Object':'Object',
+            'Array':'Array'
+        }
+        function str(obj){//判断是否为数组和非空对象
+            return Object.prototype.toString.call(obj).slice(8,-1)
+        }
+        if(compareObject.hasOwnProperty(str(obj))){
+            newOne = str(obj) == 'Object' ? {} : [];
+            for(key in obj){
+                if(compareObject.hasOwnProperty(str(obj[key])) == 'Object'){
+                    newOne[key] = deepClone(obj[key])
+                }else{
+                    newOne[key] = obj[key]
+                }
+            }
+        }else{
+            newOne = obj;
+        }
+        return newOne;
+    }
+    var nobj = deepClone(a);
+    var bobj = deepClone(b);
+*/  
+/*
+//去重与计数
+var arr = [1,1,4,6,8,9,10,8,9,7,5,6,1,5,7,8,2,0,99,2,88];
+function countDif(arr){
+    var onlyArr = [],
+        count = [];
+        for(var i = 0; i < arr.length; i ++){
+            onlyArr.indexOf(arr[i]) > -1 ?  null : onlyArr.push(arr[i])
+        }
+        for(var i = 0; i < onlyArr.length; i ++){
+            count[i] = 0;
+            for(var j = 0; j < arr.length; j ++){
+                if(arr[j] == onlyArr[i]){
+                    count[i] ++;
+                }
+            }
+        }
+        return [onlyArr,count]
+}
+console.log(countDif(arr))
+*/
+/*
+//去重方法一
+function unique(arr){
+var obj = {};
+var newArr = []
+    arr.forEach(function(item, index){
+        obj[item] = index;
+    })
+    for(key in obj){
+       newArr.push(key)
+    }
+    return newArr;
+}
+console.log(unique(arr))
+*/
+/*
+//去重方法二
+function unique(arr){
+    var newArr = [];
+    for(var i = 0; i < arr.length; i ++){
+        newArr.indexOf(arr[i]) > -1 ?  null : newArr.push(arr[i])
+    }
+    return newArr;
+}
+*/
+/*
+//根据数组 生成按钮 点击相应的 value
+ var arr = [1, 2, 3, 4, 5];
+ function creatButton(arr){
+     var  _div = document.getElementById('box');
+     for(var i = 0; i < arr.length; i ++){
+        (function(index){
+            var _button = document.createElement("button");
+            _button.innerText = arr[index];
+            _button.onclick = function(){
+                alert(arr[index])
+            }
+            _div.appendChild(_button)
+        })(i)
+     }
+ }
+ creatButton(arr)
+ */
+// var arr = [1, 41, 5, 65, 100];
+/***
+//sort重写和优化
+Array.prototype.mySort = function (callback){
+    if(typeof callback == 'function'){
+        for(var i = 0; i < this.length; i ++){
+            for(var j = i + 1; j < this.length; j ++){
+                if( callback(this[i],this[j]) > 0){
+                    var tmp = this[i];
+                    this[i] = this[j];
+                    this[j] = tmp
+                }
+            }
+        }
+    }else{
+        for(var i = 0; i < this.length; i ++){
+            for(var j = i + 1; j < this.length; j ++){
+                if(this[i].toString() > this[j].toString()){
+                    var tmp = this[i];
+                    this[i] = this[j];
+                    this[j] = tmp
+                }
+            }
+        }
+    }
+     return this;
+}
+Array.prototype.mySort = function (callback){
+        function flag(a, b){
+          return  typeof callback == 'function'? callback(a,b) > 0
+                                               : a.toString() > b.toString()
+        }
+        for(var i = 0; i < this.length; i ++){
+            for(var j = i + 1; j < this.length; j ++){
+                if( !!flag(this[i], this[j])){
+                    var tmp = this[i];
+                    this[i] = this[j];
+                    this[j] = tmp
+                }
+            }
+        }
+     return this;
+}
+console.log(arr.mySort(function (a,b){return a-b}))
+console.log(arr.sort())
+***/
+// console.log(arr.myreverse())
+/****
+//reverse重写
+Array.prototype.myreverse = function (){
+    for(var i = 0; i < this.length ; i ++){
+        this.push(this[this.length - i - 1])
+        this.splice(this.length - i - 2, 1)
+    }
+    return this
+}
+Array.prototype.myreverse = function (){
+    var newArr = []
+    for(var i = 0; i < this.length ; i ++){
+       newArr.unshift(this[i])
+    }
+    for(var i = 0; i < this.length ; i ++){
+        this[i] = newArr[i]
+    }
+    return this
+}
+console.log(arr.reverse())
+Array.prototype.myreverse = function (){
+    for(var i = 0; i < this.length - 1; i ++){
+        this.push(this[this.length - i - 2])
+        this.splice( - i - 3, 1)
+    }
+    return this
+}
+
+// console.log(Math.prototype)
+//Math.max()重写
+Math.myMax = function (){
+      var item = arguments;
+      var max;
+      for(var i = 0; i < item.length; i ++){       
+        if(!(typeof(item[i]) == 'number')){
+            return NaN;
+        }else{         
+            if(max == undefined){
+                max = item[i]
+            }else{
+                max =  item[i] > max ? item[i] : max            
+            }
+        }
+      }
+      return max;
+}
+console.log(Math.myMax(1,8,5,7))
+
+var _li = document.getElementsByTagName('li');
+var _box = document.getElementById('box');
+var _span = _box.children;
+console.log(_span)
+for(var i = 0; i < _li.length; i ++){
+    _li[i].addEventListener("click", B, false);
+}
+function B(e){
+    var e = e || window.event;
+    var index = Array.prototype.indexOf.call(_li, e.target);
+    console.log(index)
+    for (var i = 0; i < _li.length; i ++){
+        _span[i].style.display = 'none';
+    }
+
+    for (var i = 0; i < _li.length; i ++){
+        _li[i].style.fontWeight = 'normal';
+    }
+    e.target.style.fontWeight = 600;
+    _span[index].style.display = 'block';
+}
+B(a)
+var obj = {a:1};
+B.call(obj)
+
+
+
+var arr = [1, 1, 5, 8, 10, 22, 35]
+Array.prototype.myforeach = function (fun, context) {
+    var len = this.length;
+    for(var i = 0; i < len; i ++){
+        fun.call(this[i], i, this);
+    }
+}
+// arr.forEach(function(item,index,arr){
+//     console.log(item,index,arr);
+// },[3, 4, 5])
+// arr.forEach(function(item,index,arr){
+// console.log(item,index,arr);
+// })
+arr.myforeach(function(item,index,arr){
+    
+})
+
+Array.prototype.myForEach = function(callback){
+    for(var i = 0 ; i < this.length ; i++){
+        var element = this[i];
+        callback(element,i,this);
+    }
+   
+}
+arr.myForEach(function (a,b,c){
+    console.log(a +''+ b + '' + c)
+})
+arr.myForEach(function(item,index,arr){
+    console.log(item,index,arr);
+})
+function A(callback) {
+    callback();  
+    console.log('我是主函数');      
+}
+
+//定义回调函数
+function B(){
+    setTimeout("", 3000);//模仿耗时操作  
+}
+add(a,b,function(sum) {
+    console.log(sum)
+})
+function add (num1,num2,callback) {
+    var sum = num1 + num2;
+    callback()
+}
+
+
+
+
+function addEV(t, e, n) {
+  window.attachEvent ? t.attachEvent('on' + e, n)  : window.addEventListener && t.addEventListener(e, n, !1)
+}
+var _div = document.getElementById('box');
+function clickEvent(){
+    alert(1)
+}
+function clickEvent2(){
+    alert(2)
+}
+console.log(_div)
+addEV(_div,'click', clickEvent)
+addEV(_div,'click', clickEvent2)
+****/
+</script>
+</body>
+</html>
